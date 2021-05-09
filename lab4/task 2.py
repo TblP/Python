@@ -1,64 +1,74 @@
 class Deque:
-    def __init__(self,name,name2):
-        self.infile = name
-        self.outfile = name2
-        self.items = ""
-        self.text = ""
-        self.alf = ['a','b','c','d','e','f','g','h','i','j','k','l','m',
-                    'n','o','p','q','r','s','t','u','v','w','x','y','z']
+    def __init__(self):
+        self.items = []
+
     def isEmpty(self):
         return self.items == []
 
     def addFront(self, item):
-        self.items += (self.alf[item])
+        self.items.append(item)
+
+    def addRear(self, item):
+        self.items.insert(0,item)
+
+    def removeFront(self):
+        return self.items.pop()
 
     def removeRear(self):
-        self.text = self.text[:0] + self.text[0+1:]
-        return self.text
+        return self.items.pop(0)
 
     def size(self):
         return len(self.items)
 
-class Main(Deque):
-    def decryption(self):
-        with open(self.infile, "r") as f:
-            self.text = f.read()
-            size = len(self.text)-1
-            while Deque.size(self)-1 != size:
-                if self.text[0] != " ":
-                    if self.text[0] != ",":
-                        if self.alf[self.alf.index(self.text[0])] != self.alf[len(self.alf)-2] \
-                                and self.alf[self.alf.index(self.text[0])] != self.alf[len(self.alf)-1]:
-                            u = self.alf.index(self.text[0])
-                            Deque.addFront(self,u+2)
-                            Deque.removeRear(self)
-                        else:
-                            if self.alf[self.alf.index(self.text[0])] == self.alf[len(self.alf)-2]:
-                                Deque.addFront(self,0)
-                                Deque.removeRear(self)
-                            else:
-                                Deque.addFront(self, 1)
-                                Deque.removeRear(self)
-                    else:
-                            self.items += ","
-                            Deque.removeRear(self)
-                else:
-                    if Deque.isEmpty(self) == False:
-                        if self.text[0] == " ":
-                            self.items += " "
-                            Deque.removeRear(self)
 
-        return self.items
 
-    def isClose(self):
-        # проверка на пустоту входного файла
-        if Deque.isEmpty(self) == False:
-            with open(self.outfile, "w") as o:
-                    o.write(str(self.items) + '\n')
+def generationAlp():
+    alph = 'abcdefghijklmnopqrstuvwxyz'
+    for i in range(25):
+        alf.addFront(alph[i])
+    alf.removeFront()
 
+def decryption():
+    t = ''
+    generationAlp()
+    with open('text2.txt', "r") as f:
+        z = f.read()
+        for i in range(len(z)):
+            s.addFront(z[i].lower())
+        s.addFront('#')
+    startSize = s.size()-1
+    while decrp.size() != startSize:
+        a = s.removeRear()
+        check = True
+        if a.isalpha():
+            while check == True:
+                if a == 'y':
+                    a = alf.items[0]
+                    decrp.addFront(a)
+                    break
+                elif a == 'z':
+                    alf.removeRear()
+                    a = alf.items[0]
+                    decrp.addFront(a)
+                    generationAlp()
+                    break
+                elif a == alf.removeRear():
+                        alf.removeRear()
+                        a = alf.items[0]
+                        decrp.addFront(a)
+                        alf.items.clear()
+                        generationAlp()
+                        break
+        else:
+            decrp.addFront(a)
+
+    for i in range(decrp.size()):
+        t += decrp.removeRear()
+    return t
 
 if __name__ == "__main__":
-    Kn = Main('text2.txt','out2.txt')
-    Kn.decryption()
-    Kn.isClose()
+    s = Deque()
+    alf = Deque()
+    decrp = Deque()
+    print(decryption())
 

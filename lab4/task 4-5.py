@@ -37,44 +37,44 @@ class Deque:
 
     def size(self):
         return len(self.items)
-class func(Stack):
-    def check(self):
-        k = 0
-        s = Stack()
-        with open("code.txt", "r") as f:
-            z = f.read()
-            for i in range(len(z)):
-                s.push(z[i])
-        while len(s.items) != 0:
-            a = s.pop()
-            if a == ")" or a == "(":
-                k+=1
-        if k % 2 == 0:
-            k = "четное кол-во"
-        else:
-            k = "нечетное кол-во"
-        return k
-class func2(Deque):
-    def check(self):
-        k = 0
-        s = Deque()
-        with open("code.txt", "r") as f:
-            z = f.read()
-            for i in range(len(z)):
-                s.addFront(z[i])
-        while len(s.items) != 0:
-            a = s.removeRear()
-            if a == "}" or a == "{":
-                k+=1
 
-        if k % 2 == 0:
-            k = "четное кол-во"
-        else:
-            k = "нечетное кол-во"
-        return k
+def check():
+    k = 0
+
+    with open("code.txt", "r") as f:
+        z = f.read()
+        for i in range(len(z)):
+            s.push(z[i])
+    while len(s.items) != 0:
+        a = s.pop()
+        if a == ")" or a == "(":
+            k+=1
+    if k % 2 == 0:
+        k = "четное кол-во"
+    else:
+        k = "нечетное кол-во"
+    return k
+
+def check2():
+    k = 0
+    s2 = Deque()
+    with open("code.txt", "r") as f:
+        z = f.read()
+        for i in range(len(z)):
+            s2.addFront(z[i])
+    while len(s.items) != 0:
+        a = s2.removeRear()
+        if a == "}" or a == "{":
+            k+=1
+
+    if k % 2 == 0:
+        k = "четное кол-во"
+    else:
+        k = "нечетное кол-во"
+    return k
 
 if __name__ == "__main__":
-    stek = func()
-    print(stek.check() + " - ()")
-    dek = func2()
-    print(dek.check() + " - {}")
+    s = Stack()
+    s2 = Deque()
+    print(check() + " - ()")
+    print(check2() + " - {}")

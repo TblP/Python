@@ -8,9 +8,8 @@ class Stack:
     def push(self, item):
         self.items.append(item)
 
-
     def pop(self):
-        return self.items.pop(0)
+        return self.items.pop()
 
     def peek(self):
         return self.items[len(self.items) - 1]
@@ -38,47 +37,47 @@ class Deque:
 
     def size(self):
         return len(self.items)
-class func(Stack):
-    def check(self):
-        s = Stack()
 
-        alp = Stack()
-        num = Stack()
-        b = Stack()
+def sort_symb():
+    s = Stack()
+    result = ''
+    alp = Stack()
+    num = Stack()
+    b = Stack()
 
-        with open("text6.txt", "r") as f:
-            z = f.read()
-            for i in range(len(z)):
-                s.push(z[i])
+    with open("text6.txt", "r") as f:
+        z = f.read()
+        for i in range(len(z)):
+            s.push(z[i])
 
-        while len(s.items) > 0:
-            a = s.pop()
+    while len(s.items) > 0:
+        a = s.pop()
 
-            if a.isdigit():
-                num.push(a)
+        if a.isdigit():
+            num.push(a)
 
-            elif a.isalpha():
-                alp.push(a)
+        elif a.isalpha():
+            alp.push(a)
 
-            elif a != "\n" and a != " ":
-                b.push(a)
-        print("\nNumbers: ", end='\t')
-        for i in range(num.size()):
-            print(num.pop(), end='')
-        print("\nLetters: ", end='\t')
-        for i in range(alp.size()):
-            print(alp.pop(), end='')
-        print("\nSymbols: ", end='\t')
-        for i in range(b.size()):
-            print(b.pop(), end='')
+        elif a != "\n" and a != " ":
+            b.push(a)
 
-        return("")
+    for i in range(num.size()):
+        result += num.pop()
+
+    for i in range(alp.size()):
+        result +=alp.pop()
+
+    for i in range(b.size()):
+        result += b.pop()
+    return result
+
 
 def search():
-    s = Deque()
 
-    numpl = Deque()
-    numnm = Deque()
+
+    result = ""
+    result2 = ""
 
     with open("text7.txt", "r") as f:
         z = f.read()
@@ -97,14 +96,17 @@ def search():
         else:
             numpl.addFront(a)
 
-    print("\n \nMinus: ", end='\t')
-    for i in range(numnm.size()):
-        print(numnm.removeRear(), end='')
-    print("\nPlus: ", end='\t')
     for i in range(numpl.size()):
-        print(numpl.removeRear(), end='')
+        result += numpl.removeRear()
+
+    for i in range(numnm.size()):
+        result2 += numnm.removeRear()
+    m = "Plus " + result + " and minus " + result2
+    return m
 
 if __name__ == "__main__":
-    stek = func()
-    stek.check()
-    search()
+    s = Deque()
+    numpl = Deque()
+    numnm = Deque()
+    print("6 задание - " + sort_symb())
+    print("7 задание - " + search())
