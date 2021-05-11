@@ -1,48 +1,37 @@
-class Deque:
-    #инициализаяция
-    def __init__(self):
-        self.file = []
-
-    #проверка на пустоту
-    def isEmpty(self):
-        return self.file == []
-
-
-class Main(Deque):
-    #открытие файла
-    def isOpen(self):
-        # проверка на пустоту входного файла
-        if Deque.isEmpty(self) == False:
-            with open('text.txt', "r") as f:
-                # преображения данных файла
-                s = ""
-                self.file = f.read()
-                for i in range(len(self.file)):
-                    if self.file[i] == ',':
-                        s += '\n'
-                    else:
-                        s += self.file[i]
-                b = 0
-                for i in range(len(s)):
-                    if s[i] == '\n':
-                        self.file.append(s[b:i])
-                        b = i + 1
-                    if i == len(s)-1:
-                        self.file.append(s[b:i+1])
-
-                self.file = sorted(self.file)
-
-    # закрытие файла
-    def isClose(self):
-        # проверка на пустоту входного файла
-        if Deque.isEmpty(self) == False:
-            with open('out.txt', "w") as o:
-                for i in range(len(self.file)):
-                    o.write(str(self.file[i])+'\n')
+import random
+from lab4.containers import deque
 
 
 if __name__ == "__main__":
-    Kn = Main()
-    Kn.isOpen()
-    Kn.isClose()
+    #Int deque
+    deque_ = deque()
+    for i in range(10):
+        deque_.push_back(random.randint(1, 100))
 
+    deque_.sort()
+
+    print("Sorting integer deque:")
+    for i in range(deque_.size()):
+        print(deque_.pop_back(), end=' ')
+    #Int reverse deque
+    deque_ = deque()
+    for i in range(10):
+        deque_.push_back(random.randint(1, 100))
+
+    deque_.sort(lambda lhs, rhs: lhs < rhs)
+
+    print("\nSorting integer deque(reversed):")
+    for i in range(deque_.size()):
+        print(deque_.pop_back(), end=' ')
+
+    #String deque
+    deque_ = deque()
+    with open("text.txt", "r") as file:
+        books_str = file.readlines()
+        for i in range(len(books_str)):
+            deque_.push_back(books_str[i])
+
+    print("\nSorting string deque:")
+    deque_.sort(lambda lhs, rhs: lhs[0] > rhs[0])
+    for i in range(deque_.size()):
+        print(str(i + 1) + "): " + deque_.pop_back(), end='')
